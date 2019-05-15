@@ -418,6 +418,8 @@ if ( ! class_exists( 'MC_Export_Bookings' ) ) {
 							$customer_phone     = ( $order->get_billing_phone() ? $order->get_billing_phone() : 'N/A' );
 							$price              = ( $order->get_total() ? $order->get_total() : 'N/A' );
 
+							$band_name   = get_post_meta( $order_id, 'band_name', true );
+							$planned_use = get_post_meta( $order_id, 'planned_use', true );
 						} else {
 							$customer_name = $customer_last_name = $customer_mail = $customer_phone = $price = 'N/A';
 						}
@@ -440,6 +442,8 @@ if ( ! class_exists( 'MC_Export_Bookings' ) ) {
 								$price,
 								$should_have_paid,
 								$booking_person_count,
+								$band_name,
+								$planned_use,
 								$booking_note
 							);
 							// here we construct the array to pass informations to export CSV
@@ -561,6 +565,8 @@ if ( ! class_exists( 'MC_Export_Bookings' ) ) {
 						$customer_phone     = ( $order->get_billing_phone() ? $order->get_billing_phone() : 'N/A' );
 						$price              = ( $order->get_total() ? $order->get_total() : 'N/A' );
 
+						$band_name   = get_post_meta( $order_id, 'band_name', true );
+						$planned_use = get_post_meta( $order_id, 'planned_use', true );
 					} else {
 						$customer_name = $customer_last_name = $customer_mail = $customer_phone = $price = 'N/A';
 					}
@@ -583,6 +589,8 @@ if ( ! class_exists( 'MC_Export_Bookings' ) ) {
 							$price,
 							$should_have_paid,
 							$booking_person_count,
+							$band_name,
+							$planned_use,
 							$booking_note
 						);
 						// here we construct the array to pass informations to export CSV
@@ -637,6 +645,8 @@ if ( ! class_exists( 'MC_Export_Bookings' ) ) {
 				__( 'Paid price', 'export-bookings-to-csv' ),
 				__( 'Should Have Paid', 'export-bookings-to-csv' ),
 				__( 'Persons', 'export-bookings-to-csv' ),
+				__( 'Band/Artist Name', 'export-bookings-to-csv' ),
+				__( 'Planned Use', 'export-bookings-to-csv' ),
 				__( 'Note', 'export-bookings-to-csv' )
 			);
 			fputcsv( $f, $header, $delimiter );
